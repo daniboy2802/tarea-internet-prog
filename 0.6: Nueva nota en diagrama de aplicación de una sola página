@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: El usuario pulsa "Save" dentro de la SPA
+    Note right of browser: El manejador del submit llama a e.preventDefault(): no hay envío de formulario ni recarga
+    Note right of browser: La nota se agrega al arreglo local y redrawNotes() actualiza el DOM de inmediato
+
+    Note right of browser: Después, sendToServer(note) manda la nota en segundo plano
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa (Content-Type: application/json)
+    activate server
+    Note left of server: El servidor guarda la nota recibida en el cuerpo JSON
+    server-->>browser: 201 Created {"message":"note created"}
+    deactivate server
+
+    Note right of browser: La respuesta solo confirma el guardado: la interfaz ya estaba actualizada

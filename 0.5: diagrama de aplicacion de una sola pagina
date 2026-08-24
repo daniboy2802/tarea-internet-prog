@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: El usuario entra a la versión SPA. Solo se carga el documento una vez.
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: documento HTML de la SPA
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: hoja de estilos CSS
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server-->>browser: archivo JavaScript de la SPA
+    deactivate server
+
+    Note right of browser: spa.js se ejecuta y pide los datos por su cuenta
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "hola hola", "date": "2026-08-23T22:10:30.512Z" }, ... ]
+    deactivate server
+
+    Note right of browser: El callback dibuja las notas en el DOM. A partir de aquí no hay más recargas de página.
