@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  background: #fff;
+  font-family: sans-serif;
+}
+
+.fso {
+  max-width: 640px;
+  margin: 24px;
+  color: #111;
+}
+
+.fso nav {
+  margin-bottom: 16px;
+}
+
+.fso button {
+  margin-right: 8px;
+}
+
+.fso table td {
+  padding-right: 16px;
+}
